@@ -1,0 +1,26 @@
+version: '3.4'
+services: 
+    weatherapp_backend:
+        build: 
+            context: ./backend
+        env_file: 
+            - ./backend/.env
+        ports: 
+            - "9000:9000"
+        container_name: weatherapp_backend
+        stdin_open: true #docker run -i
+        tty: true        #docker run -t
+        volumes: 
+            - ./backend:/app/weatherapp_backend
+            - /app/weatherapp_backend/node_modules
+    weatherapp_frontend:
+        build: 
+            context: ./frontend
+        ports: 
+            - "8000:8000"
+        container_name: weatherapp_frontend
+        stdin_open: true
+        tty: true
+        volumes: 
+            - ./frontend:/app/weatherapp_frontend
+            - /app/weatherapp_frontend/node_modules
